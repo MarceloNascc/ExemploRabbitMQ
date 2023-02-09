@@ -10,10 +10,10 @@ public class Receptor {
 
   public static void main(String[] argv) throws Exception {
     ConnectionFactory factory = new ConnectionFactory();
-    factory.setHost("ip-da-instancia-da-aws"); // Alterar
-    factory.setUsername("usuário-do-rabbitmq-server"); // Alterar
-    factory.setPassword("senha-do-rabbitmq-server"); // Alterar
-    factory.setVirtualHost("/");    Connection connection = factory.newConnection();
+    factory.setHost("100.27.10.131"); // Alterar
+    factory.setUsername("admin"); // Alterar
+    factory.setPassword("rabbitmq2022.2"); // Alterar
+    factory.setVirtualHost("/");
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
 
@@ -23,7 +23,7 @@ public class Receptor {
     System.out.println(" [*] Esperando recebimento de mensagens...");
 
     Consumer consumer = new DefaultConsumer(channel) {
-      public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)           throws IOException {
+      public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
 
         String message = new String(body, "UTF-8");
         System.out.println(" [x] Mensagem recebida: '" + message + "'");
